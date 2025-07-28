@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Metadatos del documento -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vasdom - Del campo a tu mesa</title>
+    <!-- Enlace a Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Reset y configuración base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        :root {
+            --primary: #000000;
+            --secondary: #FFD700;
+            --accent: #FFA500;
+            --dark: #333333;
+            --light: #FFFFFF;
+            --gray: #f5f5f5;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        /* Header */
+        header {
+            background-color: var(--light);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        .logo span {
+            color: var(--secondary);
+        }
+        .logo-icon {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li {
+            margin-left: 25px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        nav ul li a:hover {
+            color: var(--primary);
+            background-color: rgba(0,0,0,0.05);
+        }
+        /* Sección Hero */
+        .hero {
+            background-image: url('C:/xampp/htdocs/img/WhatsApp Image 2025-07-14 at 5.27.46 PM (1).jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--light);
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+            background-color: rgba(255, 215, 0, 0.7);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #000000;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 215, 0, 0.6);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #000000;
+        }
+        .btn {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        /* Botones sociales */
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: var(--light);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .social-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .facebook { background-color: #1877F2; }
+        .instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        .tiktok { background-color: #000000; }
+        .whatsapp-header { background-color: #25D366; }
+        /* Sección de Categorías y Productos */
+        .categories {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(to bottom, #000000, #FFD700);
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary);
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .category-tab {
+            background-color: var(--gray);
+            border: none;
+            padding: 15px 30px;
+            margin: 0 10px 10px 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s;
+            color: var(--dark);
+        }
+        .category-tab.active, .category-tab:hover {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+        /* Cuadrícula de Productos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .product-img {
+            height: 180px;
+            width: 100%;
+            background: linear-gradient(135deg, #333 0%, #000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--secondary);
+            flex-shrink: 0;
+        }
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .product-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-name {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        .product-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            flex-grow: 1;
+            min-height: 60px;
+        }
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: 500;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .product-weight {
+            background-color: var(--gray);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            flex-grow: 0;
+            margin-top: auto;
+        }
+        .whatsapp-btn i {
+            margin-right: 8px;
+        }
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 50px 20px 20px;
+            margin-top: 50px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        .contact-info {
+            list-style: none;
+        }
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--secondary);
+            min-width: 20px;
+        }
+        .hours {
+            line-height: 1.8;
+        }
+        .hours p {
+            display: flex;
+            justify-content: space-between;
+        }
+        .hours strong {
+            color: var(--secondary);
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 5px;
+            }
+            nav ul li a {
+                font-size: 0.9rem;
+                padding: 6px 8px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+                padding: 8px 15px;
+            }
+            .hero p {
+                font-size: 1.1rem;
+                padding: 8px 15px;
+                max-width: 90%;
+            }
+            .category-tabs {
+                flex-direction: row;
+                justify-content: center;
+            }
+            .category-tab {
+                margin: 5px;
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .social-buttons {
+                margin-top: 10px;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .categories {
+                padding: 15px;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .product-name {
+                font-size: 1.1rem;
+            }
+            .product-price {
+                font-size: 1.2rem;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-cheese logo-icon"></i>
+                VAS<span>DOM</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#catalogo">Catálogo</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="social-buttons">
+                <a href="https://www.facebook.com/profile.php?id=61578243366583&mibextid=ZbWKwL" target="_blank" class="social-button facebook" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/losquesosdevasdom?igsh=YzdscG1meWMwdGQz" target="_blank" class="social-button instagram" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@losquesosdevasdom?_t=ZS-8yKB3k17pnF&_r=1" target="_blank" class="social-button tiktok" aria-label="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://wa.me/9621337435" target="_blank" class="social-button whatsapp-header" aria-label="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección Hero -->
+    <section class="hero" id="inicio">
+        <h1>Del campo a tu mesa</h1>
+        <p>Productos artesanales de la más alta calidad, elaborados con pasión y tradición</p>
+        <a href="#catalogo" class="btn">Explorar Catálogo</a>
+    </section>
+
+    <!-- Catálogo de Productos -->
+    <section class="categories" id="catalogo">
+        <h2 class="section-title">Nuestros Productos</h2>
+        <div class="category-tabs">
+            <button class="category-tab active" data-category="todos">Todos</button>
+            <button class="category-tab" data-category="quesos">Quesos</button>
+            <button class="category-tab" data-category="carnesfrias">Carnes Frías</button>
+        </div>
+        <div class="products-grid">
+            <!-- Quesos -->
+            <div class="product-card" data-category="quesos">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Copilot_20250726_105812.png" alt="Queso Fresco">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Queso Fresco</h3>
+                    <p class="product-description">Queso suave y fresco, ideal para acompañar comidas ligeras.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Pieza</span>
+                        <span class="product-price">$23.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="quesos">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (10).png" alt="Quesillo">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Quesillo</h3>
+                    <p class="product-description">Quesillo cremoso, perfecto para derretir en tus platillos favoritos.</p>
+                    <div class="product-details">
+                        <span class="product-weight">1 kg</span>
+                        <span class="product-price">$97.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="quesos">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (14).png" alt="Queso Botanero">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Queso Botanero</h3>
+                    <p class="product-description">Queso botanero tradicional con sabor intenso y textura firme.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Entero</span>
+                        <span class="product-price">$90.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="quesos">
+                <div class="product-img">
+                    <img src="C:\Users\vazdo\Downloads\Diseño sin título (13).png" alt="Queso Enchilado">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Queso Enchilado</h3>
+                    <p class="product-description">Queso enchilado con un toque picante, ideal para antojitos mexicanos.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Entero</span>
+                        <span class="product-price">$90.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="quesos">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (7).png" alt="Queso Seco">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Queso Seco</h3>
+                    <p class="product-description">Queso seco con sabor intenso, perfecto para rallar o Despolvorear.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Pieza</span>
+                        <span class="product-price">$39.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="quesos">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (20).png" alt="Mantequilla">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Mantequilla</h3>
+                    <p class="product-description">Mantequilla de alta calidad, cremosa y con sabor natural.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Pieza</span>
+                        <span class="product-price">$56.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="quesos">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (27).png" alt="Queso Amarillo">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Queso Amarillo</h3>
+                    <p class="product-description">Queso amarillo versátil, ideal para fundir o comer solo.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Caja</span>
+                        <span class="product-price">$97.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+
+            <!-- Cremas movidas a Quesos -->
+            <div class="product-card" data-category="quesos">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (31).png" alt="Crema">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Crema</h3>
+                    <p class="product-description">Crema fresca de la mejor calidad para tus recetas.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Lt</span>
+                        <span class="product-price">$47.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="quesos">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (23).png" alt="Doble Crema">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Doble Crema</h3>
+                    <p class="product-description">Crema doble con mayor contenido de grasa para mayor sabor.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Pieza</span>
+                        <span class="product-price">$90.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+
+            <!-- Carnes Frías -->
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Copilot_20250728_105849.png" alt="Chorizo de Cerdo">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Chorizo de Cerdo</h3>
+                    <p class="product-description">Chorizo de cerdo tradicional con especias naturales.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Pieza</span>
+                        <span class="product-price">$95.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (8).png" alt="Jamón Económico">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Jamón Económico</h3>
+                    <p class="product-description">Jamón de excelente sabor a un precio accesible.</p>
+                    <div class="product-details">
+                        <span class="product-weight"></span>
+                        <span class="product-price">$53.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (22).png" alt="Jamón Virginia">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Jamón Virginia</h3>
+                    <p class="product-description">Jamón Virginia de calidad premium con sabor inigualable.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Pieza</span>
+                        <span class="product-price">$89.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (28).png" alt="Maíz Pozolero">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Maíz Pozolero</h3>
+                    <p class="product-description">Maíz especial para preparar pozole, con granos seleccionados.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Paquete</span>
+                        <span class="product-price">$28.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Copilot_20250728_110438.png" alt="Mole">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Mole</h3>
+                    <p class="product-description">Ideal para acompañar pollo, cerdo, enchiladas o simplemente disfrutar con tortillas recién hechas.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Grande</span>
+                        <span class="product-price">$299.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Copilot_20250728_103806.png" alt="Salchicha para Asar">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Salchicha para Asar</h3>
+                    <p class="product-description">Salchicha especial para asar, jugosa y sabrosa.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Paquete</span>
+                        <span class="product-price">$67.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (30).png" alt="Chuleta de Cerdo">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Chuleta de Cerdo</h3>
+                    <p class="product-description">Chuleta de cerdo fresca y jugosa, lista para cocinar.</p>
+                    <div class="product-details">
+                        <span class="product-weight">kg</span>
+                        <span class="product-price">$150.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (26).png" alt="Chuleta de Pavo">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Chuleta de Pavo</h3>
+                    <p class="product-description">Chuleta de pavo magra y sabrosa, una opción saludable.</p>
+                    <div class="product-details">
+                        <span class="product-weight">kg</span>
+                        <span class="product-price">$90.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (16).png" alt="Chicharrón">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Chicharrón</h3>
+                    <p class="product-description">Chicharrón crujiente, perfecto para tacos o como snack.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Paquete</span>
+                        <span class="product-price">$25.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (25).png" alt="Salchicha">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Salchicha</h3>
+                    <p class="product-description">Salchicha de cerdo, versátil para diferentes preparaciones.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Paquete</span>
+                        <span class="product-price">$89.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Copilot_20250726_114623.png" alt="Tocino">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Tocino</h3>
+                    <p class="product-description">Tocino ahumado, ideal para el desayuno.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Paquete</span>
+                        <span class="product-price">$144.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (15).png" alt="Chorizo Español">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Chorizo Español</h3>
+                    <p class="product-description">Chorizo español curado, con un sabor intenso y característico.</p>
+                    <div class="product-details">
+                        <span class="product-weight"></span>
+                        <span class="product-price">$93.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="carnesfrias">
+                <div class="product-img">
+                    <img src="C:\xampp\htdocs\img\Diseño sin título (11).png" alt="Margarina">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Margarina</h3>
+                    <p class="product-description">Margarina cremosa, ideal para untar o cocinar.</p>
+                    <div class="product-details">
+                        <span class="product-weight">Paquete</span>
+                        <span class="product-price">$49.00</span>
+                    </div>
+                    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Ordenar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>VASDOM</h3>
+                <p>Distribuidora de quesos y productos lácteos de la más alta calidad, elaborados con pasión y tradición desde el campo hasta tu mesa.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61578243366583&mibextid=ZbWKwL" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/losquesosdevasdom?igsh=YzdscG1meWMwdGQz" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@losquesosdevasdom?_t=ZS-8yKB3k17pnF&_r=1" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/9621337435" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-phone"></i> +52 962 133 7435</li>
+                    <li><i class="fas fa-envelope"></i> vazdom058@gmail.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Tapachula Chiapas</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Horario de Atención</h3>
+                <div class="hours">
+                    <p><strong>Lun - Vie:</strong> <span>7:00 AM - 17:00 PM</span></p>
+                    <p><strong>Sábado:</strong> <span>07:00 AM - 17:00 PM</span></p>
+                    <p><strong>Domingo:</strong> <span>Cerrado</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 VASDOM - Todos los derechos reservados
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            const productCards = document.querySelectorAll('.product-card');
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    categoryTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const category = tab.dataset.category;
+                    productCards.forEach(card => {
+                        if (category === 'todos' || card.dataset.category === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            const whatsappButtons = document.querySelectorAll('.whatsapp-btn');
+            whatsappButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.closest('.product-card').querySelector('.product-name').textContent;
+                    const message = `Hola, me interesa comprar: ${productName}. ¿Está disponible?`;
+                    const whatsappUrl = `https://wa.me/529621337435?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
